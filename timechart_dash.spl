@@ -1,0 +1,8 @@
+index="aws_s3_logs"
+| eval status_category=case(
+    status_code >= 400 AND status_code < 500, "Client Errors",
+    status_code >= 500, "Server Errors",
+    status_code >= 200 AND status_code < 300, "Successful",
+    true(), "Other"
+)
+| timechart span=1h count by status_category
