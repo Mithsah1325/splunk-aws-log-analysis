@@ -1,0 +1,2 @@
+index=linux_logs
+| timechart count by host
